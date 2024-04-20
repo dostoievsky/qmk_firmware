@@ -1,0 +1,8 @@
+#ifndef CONFIG_USER_H
+#define CONFIG_USER_H
+
+#define UNICODE_SELECTED_MODES UNICODE_MODE_LINUX
+
+#define TAPPING_TERM 200
+
+#endif
