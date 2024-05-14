@@ -86,3 +86,12 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 
+
+void oneshot_mods_changed_user(uint8_t mods) {
+	if (mods & MOD_MASK_SHIFT) {
+        	rgb_matrix_sethsv(HSV_WHITE);
+	}
+	if (!mods) {
+        	rgb_matrix_sethsv(HSV_GREEN);
+	}
+}
