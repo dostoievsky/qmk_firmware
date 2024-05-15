@@ -32,6 +32,7 @@ enum layer_names {
 #define KC_RE LT(2, KC_BSPC)
 #define OSM_LSFT OSM(MOD_LSFT)
 #define KC_CCED ALGR(KC_COMMA)
+#define UNDO
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_ortho_4x12(
@@ -55,8 +56,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_CONTROL] = LAYOUT_ortho_4x12(
         _______, _______, _______, _______, _______, _______, _______, G(KC_1), G(KC_2), G(KC_3), KC_PSCR, C(KC_SCLN),
         _______, _______, _______, _______, _______, _______, _______, G(KC_4), G(KC_5), G(KC_6), _______, _______,
-        _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______, _______, G(KC_7), G(KC_8), G(KC_9), _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, G(KC_0), _______, _______, _______
+        _______, _______, _______, _______, _______, _______, _______, G(KC_7), G(KC_8), G(KC_9), _______, _______,
+        _______, _______, _______, _______, _______, QK_LEAD, QK_LEAD, _______, G(KC_0), _______, _______, _______
     )
 };
 
@@ -86,4 +87,25 @@ void oneshot_mods_changed_user(uint8_t mods) {
 	if (!mods) {
         	rgb_matrix_sethsv(HSV_GREEN);
 	}
+}
+
+
+void leader_start_user(void) {
+    rgb_matrix_sethsv(HSV_WHITE);
+}
+
+void leader_end_user(void) {
+    if (leader_sequence_one_key(KC_Z)) {
+        SEND_STRING(SS_LCTL("z"));
+    } else if (leader_sequence_one_key(KC_X)) {
+        SEND_STRING(SS_LCTL("x"));
+    } else if (leader_sequence_one_key(KC_C)) {
+        SEND_STRING(SS_LCTL("c"));
+    } else if (leader_sequence_one_key(KC_V)) {
+        SEND_STRING(SS_LCTL("v"));
+    } else if (leader_sequence_two_keys(KC_D, KC_D)) {
+        // Leader, d, d => Ctrl+A, Ctrl+C
+        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
+    }
+    rgb_matrix_sethsv(HSV_GREEN);
 }
