@@ -24,20 +24,21 @@ enum layer_names {
   _QWERTY,
   _LOWER,
   _RAISE,
-  _ADJUST
+  _CONTROL
 };
 
-#define KC_CCED ALGR(KC_COMMA)
+#define LT_ESC LT(3, KC_ESC)
 #define KC_LR LT(1, KC_DEL)
 #define KC_RE LT(2, KC_BSPC)
 #define OSM_LSFT OSM(MOD_LSFT)
+#define KC_CCED ALGR(KC_COMMA)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_ortho_4x12(
-        KC_ESC,     KC_Q,    KC_W,    KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,  KC_I,    KC_O,     KC_P,     KC_BSLS,
+        LT_ESC,     KC_Q,    KC_W,    KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,  KC_I,    KC_O,     KC_P,     KC_BSLS,
         KC_TAB,     KC_A,    KC_S,    KC_D,    KC_F,  KC_G,    KC_H,    KC_J,  KC_K,    KC_L,     KC_SCLN,  KC_QUOT,
         OSM_LSFT,   KC_Z,    KC_X,    KC_C,    KC_V,  KC_B,    KC_N,    KC_M,  KC_COMM, KC_DOT,   KC_SLSH,  KC_ENT,
-        KC_LCTL,    MO(3),   KC_LGUI, KC_LALT, KC_LR, KC_SPC,  KC_SPC,  KC_RE, KC_LEFT, KC_DOWN,  KC_UP,    KC_RGHT
+        KC_LCTL,    OSL(3),  KC_LGUI, KC_LALT, KC_LR, KC_SPC,  KC_SPC,  KC_RE, KC_LEFT, KC_DOWN,  KC_UP,    KC_RGHT
     ),
     [_LOWER] = LAYOUT_ortho_4x12(
         KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, S(KC_MINS), KC_EQL,
@@ -51,10 +52,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, KC_CCED, _______,
         _______, _______, _______, _______, KC_BSPC, _______, _______, _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END
     ),
-    [_ADJUST] = LAYOUT_ortho_4x12(
+    [_CONTROL] = LAYOUT_ortho_4x12(
         _______, _______, _______, _______, _______, _______, _______, G(KC_1), G(KC_2), G(KC_3), KC_PSCR, C(KC_SCLN),
         _______, _______, _______, _______, _______, _______, _______, G(KC_4), G(KC_5), G(KC_6), _______, _______,
-        KC_LSFT, _______, _______, _______, _______, _______, _______, G(KC_7), G(KC_8), G(KC_9), _______, _______,
+        _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PSTE, _______, _______, G(KC_7), G(KC_8), G(KC_9), _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, G(KC_0), _______, _______, _______
     )
 };
@@ -67,7 +68,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     case _LOWER:
         rgb_matrix_sethsv(HSV_RED);
         break;
-    case _ADJUST:
+    case _CONTROL:
         rgb_matrix_sethsv(HSV_YELLOW);
         break;
     default: //  for any other layers, or the default layer
