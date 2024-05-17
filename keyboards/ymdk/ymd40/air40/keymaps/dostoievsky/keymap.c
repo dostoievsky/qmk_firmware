@@ -33,7 +33,6 @@ enum layer_names {
 #define OSM_LSFT OSM(MOD_LSFT)
 #define OSM_RSFT OSM(MOD_RSFT)
 #define KC_CCED ALGR(KC_COMMA)
-#define UNDO
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_INSERT] = LAYOUT_ortho_4x12(
