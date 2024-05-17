@@ -39,7 +39,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         LT_ESC,     KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,  KC_I,    KC_O,     KC_P,     KC_BSLS,
         KC_TAB,     KC_A,     KC_S,    KC_D,    KC_F,  KC_G,    KC_H,    KC_J,  KC_K,    KC_L,     KC_SCLN,  KC_QUOT,
         OSM_LSFT,   KC_Z,     KC_X,    KC_C,    KC_V,  KC_B,    KC_N,    KC_M,  KC_COMM, KC_DOT,   KC_SLSH,  KC_ENT,
-        KC_LCTL,    QK_LEAD,  KC_LGUI, KC_LALT, KC_LR, KC_SPC,  KC_SPC,  KC_RE, KC_RALT, KC_MENU,  KC_RCTL,  OSM_RSFT
+        KC_LCTL,    _______,  KC_LGUI, KC_LALT, KC_LR, KC_SPC,  KC_SPC,  KC_RE, KC_RALT, KC_MENU,  KC_RCTL,  OSM_RSFT
     ),
     [_LOWER] = LAYOUT_ortho_4x12(
         KC_PLUS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
@@ -90,22 +90,3 @@ void oneshot_mods_changed_user(uint8_t mods) {
 }
 
 
-void leader_start_user(void) {
-    rgb_matrix_sethsv(HSV_WHITE);
-}
-
-void leader_end_user(void) {
-    if (leader_sequence_one_key(KC_Z)) {
-        SEND_STRING(SS_LCTL("z"));
-    } else if (leader_sequence_one_key(KC_X)) {
-        SEND_STRING(SS_LCTL("x"));
-    } else if (leader_sequence_one_key(KC_C)) {
-        SEND_STRING(SS_LCTL("c"));
-    } else if (leader_sequence_one_key(KC_V)) {
-        SEND_STRING(SS_LCTL("v"));
-    } else if (leader_sequence_two_keys(KC_D, KC_D)) {
-        // Leader, d, d => Ctrl+A, Ctrl+C
-        SEND_STRING(SS_LCTL("a") SS_LCTL("c"));
-    }
-    rgb_matrix_sethsv(HSV_GREEN);
-}
