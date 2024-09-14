@@ -1,5 +1,4 @@
-/* Copyright 2022 Dennis Kruyt (dennis@kruyt.org)
- *
+/* Copyright 2022 Dennis Kruyt (dennis@kruyt.org) *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 2 of the License, or
@@ -32,6 +31,7 @@ enum layer_names {
 #define KC_RE LT(2, KC_BSPC)
 #define OSM_LSFT OSM(MOD_LSFT)
 #define OSM_RSFT OSM(MOD_RSFT)
+#define OSM_LGUI OSM(MOD_LGUI)
 #define KC_CCED ALGR(KC_COMMA)
 #define KC_DVTM C(KC_SPC)
 
@@ -85,6 +85,9 @@ void oneshot_mods_changed_user(uint8_t mods) {
 	if (mods) {
         	rgb_matrix_sethsv(HSV_WHITE);
 	}
+ 	if (mods & MOD_MASK_GUI) {
+        	rgb_matrix_sethsv(HSV_YELLOW);
+      	}
 	if (!mods) {
         	rgb_matrix_sethsv(HSV_GREEN);
 	}
