@@ -26,7 +26,6 @@ enum layer_names {
   _CONTROL
 };
 
-#define LT_ESC LT(3, KC_ESC)
 #define KC_LR LT(1, KC_DEL)
 #define KC_RE LT(2, KC_BSPC)
 #define OSM_LSFT OSM(MOD_LSFT)
@@ -37,7 +36,7 @@ enum layer_names {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_INSERT] = LAYOUT_ortho_4x12(
-        LT_ESC,     KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,  KC_I,    KC_O,     KC_P,     KC_BSLS,
+        QK_GESC,    KC_Q,     KC_W,    KC_E,    KC_R,  KC_T,    KC_Y,    KC_U,  KC_I,    KC_O,     KC_P,     KC_BSLS,
         KC_TAB,     KC_A,     KC_S,    KC_D,    KC_F,  KC_G,    KC_H,    KC_J,  KC_K,    KC_L,     KC_SCLN,  KC_QUOT,
         OSM_LSFT,   KC_Z,     KC_X,    KC_C,    KC_V,  KC_B,    KC_N,    KC_M,  KC_COMM, KC_DOT,   KC_SLSH,  KC_ENT,
         KC_LCTL,    KC_DVTM,  OSM_LGUI, KC_LALT, KC_LR, KC_SPC,  KC_SPC,  KC_RE, KC_RALT, KC_MENU,  KC_RCTL,  OSM_RSFT
@@ -53,12 +52,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______,   KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, KC_LBRC, KC_RBRC, _______,
         _______,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, KC_CCED, _______,
         _______,   _______, _______, _______, KC_BSPC, _______, _______, _______, KC_HOME, KC_PGUP, KC_PGDN, KC_END
-    ),
-    [_CONTROL] = LAYOUT_ortho_4x12(
-        _______, G(KC_1), G(KC_2), G(KC_3), G(KC_4), G(KC_5), G(KC_6), G(KC_7), G(KC_8), G(KC_9), G(KC_0), _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
     )
 };
 
@@ -69,9 +62,6 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         break;
     case _LOWER:
         rgb_matrix_sethsv(HSV_RED);
-        break;
-    case _CONTROL:
-        rgb_matrix_sethsv(HSV_YELLOW);
         break;
     default: //  for any other layers, or the default layer
         rgb_matrix_sethsv(HSV_GREEN);
